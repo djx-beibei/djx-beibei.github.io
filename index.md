@@ -10,4 +10,4 @@ Welcome to your friend , djx-beibei's blog .
 
 同时欢迎您前来纠正+评论。 
 
-[贝贝的博客]： https://github.com/djx-beibei/djx-beibei.github.io
+[贝贝的博客]: https://github.com/djx-beibei/djx-beibei.github.io

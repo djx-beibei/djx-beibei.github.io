@@ -18,6 +18,6 @@ If you like it , please say something !
 
 [Minimalism] 是一款基于 [Jekyll] 为极简主义者打造的极简主题。
 
-[贝贝的博客]： https://github.com/djx-beibei/djx-beibei.github.io
+[贝贝的博客]: https://github.com/djx-beibei/djx-beibei.github.io
 [Minimalism]: https://github.com/showzeng/Minimalism
 [Jekyll]: https://jekyllrb.com/
