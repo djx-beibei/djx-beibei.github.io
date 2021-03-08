@@ -14,11 +14,11 @@ defaults:
     values:
       image: true
 
-title: djx-beibei
-name: djx-beibei
+title: Minimalism
+name: minimalism
 description: Welcome to your friend , djx-beibei's blog . 
 
-github: https://github.com/djx-beibei/djx-beibei.github.io
+github: https://github.com/showzeng/Minimalism
 rss: true
 
 plugins:
