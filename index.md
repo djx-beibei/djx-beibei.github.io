@@ -1,5 +1,7 @@
 ---
 layout: index
+title: 首页
+reward: true
 ---
 
 Welcome to your friend , djx-beibei's blog . 
