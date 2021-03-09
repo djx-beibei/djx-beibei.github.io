@@ -63,7 +63,7 @@ comments: true
 * 1995年怀尔斯和理查·泰勒证明了历时350年的费马猜想（费马大定理）
 * 黎曼猜想
 
-![d046977e9b63e790bd8fe0eb3913a949.png](en-resource://database/775:1)
+![2021-02-21-number_theory.png](http://jie_xue_du.gitee.io/learn_images_ben/images/beibei_knowledge/2021-02-21-number_theory.png)
 
 
 # acm数论基础
