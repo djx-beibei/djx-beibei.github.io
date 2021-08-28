@@ -316,3 +316,7 @@ Mealy 型状态机的输出是在输入信号变化以后立刻发生变化，�
     (2) 状态机第二段，组合逻辑，阻塞赋值，根据当前状态和当前输入，确定下一个状态机的状态。
     (3) 状态机第三段，时序逻辑，非阻塞赋值，因为是 Mealy 型状态机，根据当前状态和当前输入，确定输出信号。
 
+
+
+[Verilog 教程基础篇](https://www.runoob.com/w3cnote/verilog-tutorial.html)
+[Verilog 教程高级篇](https://www.runoob.com/w3cnote/verilog2-tutorial.html)
