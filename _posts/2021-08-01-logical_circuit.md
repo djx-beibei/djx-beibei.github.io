@@ -520,7 +520,7 @@ Y1 = {B, A[3:2], A[0], 4'h3 };
 //结果为Y1='b1100_0011 
 Y2 = {4{B}, 3'd4};
 //结果为 Y2=7'b111_1100 
-Y3 = {32{1'b0}};
+Y3 = {32{1'b0} };
 //结果为 Y3=32h0，常用作寄存器初始化时匹配位宽的赋初值 
 ```
 
@@ -4094,13 +4094,13 @@ module alu(
     wire [31:0] sra_step2;
     assign sra_step1 = {32{shf_1_0==2'b00}} & alu_src2
                      | {32{shf_1_0==2'b01}} & {alu_src2[31],alu_src2[31:1]}
-                     | {32{shf_1_0==2'b10}} & {{2{alu_src2[31]}},alu_src2[31:2]}
-                     | {32{shf_1_0==2'b11}} & {{3{alu_src2[31]}},alu_src2[31:3]};
+                     | {32{shf_1_0==2'b10}} & { {2{alu_src2[31]} },alu_src2[31:2]}
+                     | {32{shf_1_0==2'b11}} & { {3{alu_src2[31]} },alu_src2[31:3]};
     assign sra_step2 = {32{shf_3_2==2'b00}} & sra_step1
-                     | {32{shf_3_2==2'b01}} & {{4{sra_step1[31]}},sra_step1[31:4]}
-                     | {32{shf_3_2==2'b10}} & {{8{sra_step1[31]}},sra_step1[31:8]}
-                     | {32{shf_3_2==2'b11}} & {{12{sra_step1[31]}},sra_step1[31:12]};
-    assign sra_result = shf[4] ? {{16{sra_step2[31]}},sra_step2[31:16]} : sra_step2;
+                     | {32{shf_3_2==2'b01}} & { {4{sra_step1[31]} },sra_step1[31:4]}
+                     | {32{shf_3_2==2'b10}} & { {8{sra_step1[31]} },sra_step1[31:8]}
+                     | {32{shf_3_2==2'b11}} & { {12{sra_step1[31]} },sra_step1[31:12]};
+    assign sra_result = shf[4] ? { {16{sra_step2[31]} },sra_step2[31:16]} : sra_step2;
     
     assign alu_result = (alu_add | alu_sub) ? add_sub_result[31:0] :
                          alu_slt ? slt_result :
@@ -5498,7 +5498,7 @@ module adder(
   
   always @(posedge clk) //第二级流水：高 4bit相加
   begin
-    {cout ,sum[7:0]} <= {{1'b0,cina_reg[3:0]} + {1'b0,cinb_reg[3:0]} + cout1 ,sum1[3:0]} ;
+    {cout ,sum[7:0]} <= { {1'b0,cina_reg[3:0]} + {1'b0,cinb_reg[3:0]} + cout1 ,sum1[3:0]} ;
   end
     
 endmodule
@@ -8260,14 +8260,14 @@ always @(posedge clk) begin
                     count <= 6'b000000;
                     reg_A <= 34'b0;// 乘法运算前A寄存器被清零,作为初始部分积
                     if (signed_mult_i!=1'b1) begin
-                        reg_X <= {{2{1'b0}},opdata1_i};
+                        reg_X <= { {2{1'b0} },opdata1_i};
                         reg_Q <= {1'b0,opdata2_i,1'b0};
                     end
                     else begin
-                        reg_X <= {{2{opdata1_i[31]}},opdata1_i};
+                        reg_X <= { {2{opdata1_i[31]} },opdata1_i};
                         reg_Q <= {opdata2_i[31],opdata2_i,1'b0};
                     end
-                    neg_data1 <= {{2{~(opdata1_i[31])}},(~opdata1_i)+1};
+                    neg_data1 <= { {2{~(opdata1_i[31])} },(~opdata1_i)+1};
                 end
                 else begin
                     ready_o <= `MultResultNotReady;
@@ -8460,16 +8460,16 @@ module mul(
                                         A <= A + 0;
                                     end
                                     3'b001,3'b010 : begin//加法操作使用补码即可，倍数利用左移解决 //加mul1的补码
-                                        A <= A + ({{32{mul1[31]}},mul1} << 2*(cnt-1));
+                                        A <= A + ({ {32{mul1[31]} },mul1} << 2*(cnt-1));
                                     end
                                     3'b011 : begin//加2×mul1的补码
-                                        A <= A + ({{32{mul1[31]}},mul1} << 2*(cnt-1) + 1);
+                                        A <= A + ({ {32{mul1[31]} },mul1} << 2*(cnt-1) + 1);
                                     end
                                     3'b100: begin//减法操作利用“负补码”改成加法操作，倍数利用左移解决 //减2×mul1的补码
-                                        A <= A + ({{32{bmul1[31]}},bmul1} << 2*(cnt-1) + 1);
+                                        A <= A + ({ {32{bmul1[31]} },bmul1} << 2*(cnt-1) + 1);
                                     end
                                     3'b101,3'b110 : begin//减mul1的补码
-                                        A <= A + ({{32{bmul1[31]}},bmul1} << 2*(cnt-1));
+                                        A <= A + ({ {32{bmul1[31]} },bmul1} << 2*(cnt-1));
                                     end
                                     default: A <= 0;
                                 endcase
@@ -8479,16 +8479,16 @@ module mul(
                                         A <= A + 0;
                                     end
                                     3'b001,3'b010 : begin//加法操作使用补码即可，倍数利用左移解决 //加mul1的补码
-                                        A <= A + ({{32{mul1[31]}},mul1} << 2*(cnt-1));
+                                        A <= A + ({ {32{mul1[31]} },mul1} << 2*(cnt-1));
                                     end
                                     3'b011 : begin//加2×mul1的补码
-                                        A <= A + ({{32{mul1[31]}},mul1} << 2*(cnt-1) + 1);
+                                        A <= A + ({ {32{mul1[31]} },mul1} << 2*(cnt-1) + 1);
                                     end
                                     3'b100: begin//减法操作利用“负补码”改成加法操作，倍数利用左移解决 //减2×mul1的补码
-                                        A <= A + ({{32{bmul1[31]}},bmul1} << 2*(cnt-1) + 1);
+                                        A <= A + ({ {32{bmul1[31]} },bmul1} << 2*(cnt-1) + 1);
                                     end
                                     3'b101,3'b110 : begin//减mul1的补码
-                                        A <= A + ({{32{bmul1[31]}},bmul1} << 2*(cnt-1));
+                                        A <= A + ({ {32{bmul1[31]} },bmul1} << 2*(cnt-1));
                                     end
                                     default: A <= 0;
                                 endcase
@@ -8670,7 +8670,7 @@ module mul(
     wire[63:0] c_l6_1;
     
     assign x_ext = s ? {x[31], x} : {1'b0, x};
-    assign y_ext = s ? {{2{y[31]}}, y} : {2'b00, y};
+    assign y_ext = s ? { {2{y[31]} }, y} : {2'b00, y};
     
     //booth二位乘计算17个部分积【由于有符号和无符号乘法一起计算，需要加符号位，所以为17个部分积】
     booth2 u_b0(.x(x_ext),.y({y_ext[1:0], 1'b0}), .z(pp0), .c(c[1:0]));
@@ -8852,19 +8852,19 @@ module booth2(
     always @ * begin
         case(y)
             3'b011: begin
-                z = {{30{x[32]}}, x, 1'b0};
+                z = { {30{x[32]} }, x, 1'b0};
                 c = 2'b00;
             end
             3'b100: begin
-                z = {{30{x_neg[32]}}, x_neg, 1'b0};
+                z = { {30{x_neg[32]} }, x_neg, 1'b0};
                 c = 2'b10;
             end
             3'b001, 3'b010: begin
-                z = {{31{x[32]}}, x};
+                z = { {31{x[32]} }, x};
                 c = 2'b00;
             end
             3'b101, 3'b110: begin
-                z = {{31{x_neg[32]}}, x_neg};
+                z = { {31{x_neg[32]} }, x_neg};
                 c = 2'b01;
             end
             default: begin
@@ -9372,11 +9372,11 @@ I/O端口
 
 > 8088CPU
 
-MN/$\overline{\text{MX}}$：最小模式、最大模式
+MN/$\overline{\text{MX} }$：最小模式、最大模式
 
 ALE：地址信号，地址锁存信号，触发器
 
-$\overline{\text{DEN}}$：数据信号，数据使能信号
+$\overline{\text{DEN} }$：数据信号，数据使能信号
 
 RESET：复位信号
 
@@ -9392,7 +9392,7 @@ $A_{16}$—$A_{19}$：地址、段寄存器状态复用
 
 IO：访问输入输出接口
 
-$\overline{\text{M}}$：访问存储器
+$\overline{\text{M} }$：访问存储器
 
 $\overline{WR}$：写信号
 
@@ -9422,7 +9422,7 @@ $\overline{R}$：接收，读操作
 
 
 
-$\overline{SS_{0}}$：系统状态信号输出
+$\overline{SS_{0} }$：系统状态信号输出
 
 
 
