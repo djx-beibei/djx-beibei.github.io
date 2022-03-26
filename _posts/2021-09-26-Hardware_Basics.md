@@ -1,3 +1,8 @@
+---
+title: Hardware Basics
+categories: [longxin_nscscc]
+comments: true
+---
 # 硬件基础知识
 
 [toc]
