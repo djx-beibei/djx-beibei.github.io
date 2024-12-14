@@ -9370,7 +9370,7 @@ I/O端口
 
 
 
-> 8088CPU
+### Ox01 8088CPU
 
 MN/$\overline{\text{MX} }$：最小模式、最大模式
 
@@ -9437,7 +9437,21 @@ $\overline{SS_{0} }$：系统状态信号输出
 >
 > https://blog.csdn.net/wujiafei_njgcxy/article/details/52739846
 
+### Ox02 可编程定时器8253
 
+https://blog.csdn.net/qq_42604176/article/details/105810973
+
+https://blog.csdn.net/weixin_42214698/article/details/122515446
+
+
+
+### Ox03 可编程并行接口8255A
+
+
+
+
+
+### Ox04 可编程串行接口8250
 
 ## I/O编址方式
 
@@ -9503,7 +9517,7 @@ FPGA由6部分组成，分别为可编程输入/输出单元（IOB）、基本�
 
 
 
-原文链接：https://blog.csdn.net/wfea_lff/article/details/104199529
+原文链接：<https://blog.csdn.net/wfea_lff/article/details/104199529>
 
 
 
